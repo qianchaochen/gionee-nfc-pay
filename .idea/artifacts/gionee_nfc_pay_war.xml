@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="gionee-nfc-pay:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="gionee-nfc-pay-1.0.0.war">
+      <element id="artifact" artifact-name="gionee-nfc-pay:war exploded" />
+    </root>
+  </artifact>
+</component>

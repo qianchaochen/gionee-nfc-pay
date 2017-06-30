@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gionee.nfcPay.dao.mapper.NfcUnionCardIssuerInfoTbMapper" >
+  <resultMap id="BaseResultMap" type="com.gionee.nfcPay.vo.models.NfcUnionCardIssuerInfoTb" >
+    <id column="issuerId" property="issuerId" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="logo" property="logo" jdbcType="VARCHAR" />
+    <result column="contactNumber" property="contactNumber" jdbcType="VARCHAR" />
+    <result column="debitCallCenterNumber" property="debitCallCenterNumber" jdbcType="VARCHAR" />
+    <result column="creditCallCenterNumber" property="creditCallCenterNumber" jdbcType="VARCHAR" />
+    <result column="debitEmail" property="debitEmail" jdbcType="VARCHAR" />
+    <result column="creditEmail" property="creditEmail" jdbcType="VARCHAR" />
+    <result column="debitWebsite" property="debitWebsite" jdbcType="VARCHAR" />
+    <result column="creditWebsite" property="creditWebsite" jdbcType="VARCHAR" />
+    <result column="debitTcUrl" property="debitTcUrl" jdbcType="VARCHAR" />
+    <result column="creditTcUrl" property="creditTcUrl" jdbcType="VARCHAR" />
+    <result column="tcOption" property="tcOption" jdbcType="VARCHAR" />
+    <result column="mobileAppList" property="mobileAppList" jdbcType="VARCHAR" />
+    <result column="create_date" property="create_date" jdbcType="DATE" />
+    <result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
+    <result column="last_upd_time" property="last_upd_time" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    issuerId, version, name, description, logo, contactNumber, debitCallCenterNumber, 
+    creditCallCenterNumber, debitEmail, creditEmail, debitWebsite, creditWebsite, debitTcUrl, 
+    creditTcUrl, tcOption, mobileAppList, create_date, create_time, last_upd_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from nfc_union_card_issuer_info_tb
+    where issuerId = #{issuerId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from nfc_union_card_issuer_info_tb
+    where issuerId = #{issuerId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gionee.nfcPay.vo.models.NfcUnionCardIssuerInfoTb" >
+    insert into nfc_union_card_issuer_info_tb (issuerId, version, name, 
+      description, logo, contactNumber, 
+      debitCallCenterNumber, creditCallCenterNumber, 
+      debitEmail, creditEmail, debitWebsite, 
+      creditWebsite, debitTcUrl, creditTcUrl, 
+      tcOption, mobileAppList, create_date, 
+      create_time, last_upd_time)
+    values (#{issuerId,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, #{contactNumber,jdbcType=VARCHAR}, 
+      #{debitCallCenterNumber,jdbcType=VARCHAR}, #{creditCallCenterNumber,jdbcType=VARCHAR}, 
+      #{debitEmail,jdbcType=VARCHAR}, #{creditEmail,jdbcType=VARCHAR}, #{debitWebsite,jdbcType=VARCHAR}, 
+      #{creditWebsite,jdbcType=VARCHAR}, #{debitTcUrl,jdbcType=VARCHAR}, #{creditTcUrl,jdbcType=VARCHAR}, 
+      #{tcOption,jdbcType=VARCHAR}, #{mobileAppList,jdbcType=VARCHAR}, #{create_date,jdbcType=DATE}, 
+      #{create_time,jdbcType=TIMESTAMP}, #{last_upd_time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gionee.nfcPay.vo.models.NfcUnionCardIssuerInfoTb" >
+    insert into nfc_union_card_issuer_info_tb
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="issuerId != null" >
+        issuerId,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="logo != null" >
+        logo,
+      </if>
+      <if test="contactNumber != null" >
+        contactNumber,
+      </if>
+      <if test="debitCallCenterNumber != null" >
+        debitCallCenterNumber,
+      </if>
+      <if test="creditCallCenterNumber != null" >
+        creditCallCenterNumber,
+      </if>
+      <if test="debitEmail != null" >
+        debitEmail,
+      </if>
+      <if test="creditEmail != null" >
+        creditEmail,
+      </if>
+      <if test="debitWebsite != null" >
+        debitWebsite,
+      </if>
+      <if test="creditWebsite != null" >
+        creditWebsite,
+      </if>
+      <if test="debitTcUrl != null" >
+        debitTcUrl,
+      </if>
+      <if test="creditTcUrl != null" >
+        creditTcUrl,
+      </if>
+      <if test="tcOption != null" >
+        tcOption,
+      </if>
+      <if test="mobileAppList != null" >
+        mobileAppList,
+      </if>
+      <if test="create_date != null" >
+        create_date,
+      </if>
+      <if test="create_time != null" >
+        create_time,
+      </if>
+      <if test="last_upd_time != null" >
+        last_upd_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="issuerId != null" >
+        #{issuerId,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null" >
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="contactNumber != null" >
+        #{contactNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="debitCallCenterNumber != null" >
+        #{debitCallCenterNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="creditCallCenterNumber != null" >
+        #{creditCallCenterNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="debitEmail != null" >
+        #{debitEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="creditEmail != null" >
+        #{creditEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="debitWebsite != null" >
+        #{debitWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="creditWebsite != null" >
+        #{creditWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="debitTcUrl != null" >
+        #{debitTcUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="creditTcUrl != null" >
+        #{creditTcUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="tcOption != null" >
+        #{tcOption,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileAppList != null" >
+        #{mobileAppList,jdbcType=VARCHAR},
+      </if>
+      <if test="create_date != null" >
+        #{create_date,jdbcType=DATE},
+      </if>
+      <if test="create_time != null" >
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="last_upd_time != null" >
+        #{last_upd_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gionee.nfcPay.vo.models.NfcUnionCardIssuerInfoTb" >
+    update nfc_union_card_issuer_info_tb
+    <set >
+      <if test="version != null" >
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null" >
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="contactNumber != null" >
+        contactNumber = #{contactNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="debitCallCenterNumber != null" >
+        debitCallCenterNumber = #{debitCallCenterNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="creditCallCenterNumber != null" >
+        creditCallCenterNumber = #{creditCallCenterNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="debitEmail != null" >
+        debitEmail = #{debitEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="creditEmail != null" >
+        creditEmail = #{creditEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="debitWebsite != null" >
+        debitWebsite = #{debitWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="creditWebsite != null" >
+        creditWebsite = #{creditWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="debitTcUrl != null" >
+        debitTcUrl = #{debitTcUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="creditTcUrl != null" >
+        creditTcUrl = #{creditTcUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="tcOption != null" >
+        tcOption = #{tcOption,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileAppList != null" >
+        mobileAppList = #{mobileAppList,jdbcType=VARCHAR},
+      </if>
+      <if test="create_date != null" >
+        create_date = #{create_date,jdbcType=DATE},
+      </if>
+      <if test="create_time != null" >
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="last_upd_time != null" >
+        last_upd_time = #{last_upd_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where issuerId = #{issuerId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gionee.nfcPay.vo.models.NfcUnionCardIssuerInfoTb" >
+    update nfc_union_card_issuer_info_tb
+    set version = #{version,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      contactNumber = #{contactNumber,jdbcType=VARCHAR},
+      debitCallCenterNumber = #{debitCallCenterNumber,jdbcType=VARCHAR},
+      creditCallCenterNumber = #{creditCallCenterNumber,jdbcType=VARCHAR},
+      debitEmail = #{debitEmail,jdbcType=VARCHAR},
+      creditEmail = #{creditEmail,jdbcType=VARCHAR},
+      debitWebsite = #{debitWebsite,jdbcType=VARCHAR},
+      creditWebsite = #{creditWebsite,jdbcType=VARCHAR},
+      debitTcUrl = #{debitTcUrl,jdbcType=VARCHAR},
+      creditTcUrl = #{creditTcUrl,jdbcType=VARCHAR},
+      tcOption = #{tcOption,jdbcType=VARCHAR},
+      mobileAppList = #{mobileAppList,jdbcType=VARCHAR},
+      create_date = #{create_date,jdbcType=DATE},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      last_upd_time = #{last_upd_time,jdbcType=TIMESTAMP}
+    where issuerId = #{issuerId,jdbcType=VARCHAR}
+  </update>
+</mapper>

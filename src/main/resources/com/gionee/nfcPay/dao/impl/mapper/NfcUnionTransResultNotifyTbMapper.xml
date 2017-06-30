@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gionee.nfcPay.dao.mapper.NfcUnionTransResultNotifyTbMapper" >
+  <resultMap id="BaseResultMap" type="com.gionee.nfcPay.vo.models.NfcUnionTransResultNotifyTb" >
+    <id column="virtualCardRefId" property="virtualCardRefId" jdbcType="VARCHAR" />
+    <result column="transactionId" property="transactionId" jdbcType="VARCHAR" />
+    <result column="transactionType" property="transactionType" jdbcType="VARCHAR" />
+    <result column="approvalDateTime" property="approvalDateTime" jdbcType="VARCHAR" />
+    <result column="transactionStatus" property="transactionStatus" jdbcType="VARCHAR" />
+    <result column="paymentMethod" property="paymentMethod" jdbcType="VARCHAR" />
+    <result column="transTimeSource" property="transTimeSource" jdbcType="VARCHAR" />
+    <result column="transNoSource" property="transNoSource" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    virtualCardRefId, transactionId, transactionType, approvalDateTime, transactionStatus, 
+    paymentMethod, transTimeSource, transNoSource
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from nfc_union_trans_result_notify_tb
+    where virtualCardRefId = #{virtualCardRefId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from nfc_union_trans_result_notify_tb
+    where virtualCardRefId = #{virtualCardRefId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gionee.nfcPay.vo.models.NfcUnionTransResultNotifyTb" >
+    insert into nfc_union_trans_result_notify_tb (virtualCardRefId, transactionId, 
+      transactionType, approvalDateTime, transactionStatus, 
+      paymentMethod, transTimeSource, transNoSource
+      )
+    values (#{virtualCardRefId,jdbcType=VARCHAR}, #{transactionId,jdbcType=VARCHAR}, 
+      #{transactionType,jdbcType=VARCHAR}, #{approvalDateTime,jdbcType=VARCHAR}, #{transactionStatus,jdbcType=VARCHAR}, 
+      #{paymentMethod,jdbcType=VARCHAR}, #{transTimeSource,jdbcType=VARCHAR}, #{transNoSource,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gionee.nfcPay.vo.models.NfcUnionTransResultNotifyTb" >
+    insert into nfc_union_trans_result_notify_tb
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="virtualCardRefId != null" >
+        virtualCardRefId,
+      </if>
+      <if test="transactionId != null" >
+        transactionId,
+      </if>
+      <if test="transactionType != null" >
+        transactionType,
+      </if>
+      <if test="approvalDateTime != null" >
+        approvalDateTime,
+      </if>
+      <if test="transactionStatus != null" >
+        transactionStatus,
+      </if>
+      <if test="paymentMethod != null" >
+        paymentMethod,
+      </if>
+      <if test="transTimeSource != null" >
+        transTimeSource,
+      </if>
+      <if test="transNoSource != null" >
+        transNoSource,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="virtualCardRefId != null" >
+        #{virtualCardRefId,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionId != null" >
+        #{transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionType != null" >
+        #{transactionType,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalDateTime != null" >
+        #{approvalDateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionStatus != null" >
+        #{transactionStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentMethod != null" >
+        #{paymentMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="transTimeSource != null" >
+        #{transTimeSource,jdbcType=VARCHAR},
+      </if>
+      <if test="transNoSource != null" >
+        #{transNoSource,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gionee.nfcPay.vo.models.NfcUnionTransResultNotifyTb" >
+    update nfc_union_trans_result_notify_tb
+    <set >
+      <if test="transactionId != null" >
+        transactionId = #{transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionType != null" >
+        transactionType = #{transactionType,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalDateTime != null" >
+        approvalDateTime = #{approvalDateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionStatus != null" >
+        transactionStatus = #{transactionStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentMethod != null" >
+        paymentMethod = #{paymentMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="transTimeSource != null" >
+        transTimeSource = #{transTimeSource,jdbcType=VARCHAR},
+      </if>
+      <if test="transNoSource != null" >
+        transNoSource = #{transNoSource,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where virtualCardRefId = #{virtualCardRefId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gionee.nfcPay.vo.models.NfcUnionTransResultNotifyTb" >
+    update nfc_union_trans_result_notify_tb
+    set transactionId = #{transactionId,jdbcType=VARCHAR},
+      transactionType = #{transactionType,jdbcType=VARCHAR},
+      approvalDateTime = #{approvalDateTime,jdbcType=VARCHAR},
+      transactionStatus = #{transactionStatus,jdbcType=VARCHAR},
+      paymentMethod = #{paymentMethod,jdbcType=VARCHAR},
+      transTimeSource = #{transTimeSource,jdbcType=VARCHAR},
+      transNoSource = #{transNoSource,jdbcType=VARCHAR}
+    where virtualCardRefId = #{virtualCardRefId,jdbcType=VARCHAR}
+  </update>
+</mapper>

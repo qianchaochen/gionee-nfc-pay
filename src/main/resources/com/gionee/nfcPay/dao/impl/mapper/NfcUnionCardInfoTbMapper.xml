@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gionee.nfcPay.dao.mapper.NfcUnionCardInfoTbMapper">
+  <resultMap id="BaseResultMap" type="com.gionee.nfcPay.vo.models.NfcUnionCardInfoTb">
+    <id column="virtualCardRefId" jdbcType="VARCHAR" property="virtualCardRefId" />
+    <result column="user_id" jdbcType="VARCHAR" property="user_id" />
+    <result column="phone_no" jdbcType="VARCHAR" property="phone_no" />
+    <result column="virtualCardNum" jdbcType="VARCHAR" property="virtualCardNum" />
+    <result column="xTsmCplc" jdbcType="VARCHAR" property="xTsmCplc" />
+    <result column="cardReferenceId" jdbcType="VARCHAR" property="cardReferenceId" />
+    <result column="cardProductId" jdbcType="VARCHAR" property="cardProductId" />
+    <result column="lastDigits" jdbcType="VARCHAR" property="lastDigits" />
+    <result column="aid" jdbcType="VARCHAR" property="aid" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="personize_status" jdbcType="VARCHAR" property="personize_status" />
+    <result column="tsm_ssid" jdbcType="VARCHAR" property="tsm_ssid" />
+    <result column="tsm_sign" jdbcType="VARCHAR" property="tsm_sign" />
+    <result column="tsm_event" jdbcType="VARCHAR" property="tsm_event" />
+    <result column="tsm_rcv_time" jdbcType="TIMESTAMP" property="tsm_rcv_time" />
+    <result column="create_date" jdbcType="DATE" property="create_date" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="last_update_time" jdbcType="TIMESTAMP" property="last_update_time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    virtualCardRefId, user_id, phone_no, virtualCardNum, xTsmCplc, cardReferenceId, cardProductId, 
+    lastDigits, aid, status, personize_status, tsm_ssid, tsm_sign, tsm_event, tsm_rcv_time, 
+    create_date, create_time, last_update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from nfc_union_card_info_tb
+    where virtualCardRefId = #{virtualCardRefId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from nfc_union_card_info_tb
+    where virtualCardRefId = #{virtualCardRefId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gionee.nfcPay.vo.models.NfcUnionCardInfoTb">
+    insert into nfc_union_card_info_tb (virtualCardRefId, user_id, phone_no, 
+      virtualCardNum, xTsmCplc, cardReferenceId, 
+      cardProductId, lastDigits, aid, 
+      status, personize_status, tsm_ssid, 
+      tsm_sign, tsm_event, tsm_rcv_time, 
+      create_date, create_time, last_update_time
+      )
+    values (#{virtualCardRefId,jdbcType=VARCHAR}, #{user_id,jdbcType=VARCHAR}, #{phone_no,jdbcType=VARCHAR}, 
+      #{virtualCardNum,jdbcType=VARCHAR}, #{xTsmCplc,jdbcType=VARCHAR}, #{cardReferenceId,jdbcType=VARCHAR}, 
+      #{cardProductId,jdbcType=VARCHAR}, #{lastDigits,jdbcType=VARCHAR}, #{aid,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{personize_status,jdbcType=VARCHAR}, #{tsm_ssid,jdbcType=VARCHAR}, 
+      #{tsm_sign,jdbcType=VARCHAR}, #{tsm_event,jdbcType=VARCHAR}, #{tsm_rcv_time,jdbcType=TIMESTAMP}, 
+      #{create_date,jdbcType=DATE}, #{create_time,jdbcType=TIMESTAMP}, #{last_update_time,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gionee.nfcPay.vo.models.NfcUnionCardInfoTb">
+    insert into nfc_union_card_info_tb
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="virtualCardRefId != null">
+        virtualCardRefId,
+      </if>
+      <if test="user_id != null">
+        user_id,
+      </if>
+      <if test="phone_no != null">
+        phone_no,
+      </if>
+      <if test="virtualCardNum != null">
+        virtualCardNum,
+      </if>
+      <if test="xTsmCplc != null">
+        xTsmCplc,
+      </if>
+      <if test="cardReferenceId != null">
+        cardReferenceId,
+      </if>
+      <if test="cardProductId != null">
+        cardProductId,
+      </if>
+      <if test="lastDigits != null">
+        lastDigits,
+      </if>
+      <if test="aid != null">
+        aid,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="personize_status != null">
+        personize_status,
+      </if>
+      <if test="tsm_ssid != null">
+        tsm_ssid,
+      </if>
+      <if test="tsm_sign != null">
+        tsm_sign,
+      </if>
+      <if test="tsm_event != null">
+        tsm_event,
+      </if>
+      <if test="tsm_rcv_time != null">
+        tsm_rcv_time,
+      </if>
+      <if test="create_date != null">
+        create_date,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+      <if test="last_update_time != null">
+        last_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="virtualCardRefId != null">
+        #{virtualCardRefId,jdbcType=VARCHAR},
+      </if>
+      <if test="user_id != null">
+        #{user_id,jdbcType=VARCHAR},
+      </if>
+      <if test="phone_no != null">
+        #{phone_no,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualCardNum != null">
+        #{virtualCardNum,jdbcType=VARCHAR},
+      </if>
+      <if test="xTsmCplc != null">
+        #{xTsmCplc,jdbcType=VARCHAR},
+      </if>
+      <if test="cardReferenceId != null">
+        #{cardReferenceId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardProductId != null">
+        #{cardProductId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDigits != null">
+        #{lastDigits,jdbcType=VARCHAR},
+      </if>
+      <if test="aid != null">
+        #{aid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="personize_status != null">
+        #{personize_status,jdbcType=VARCHAR},
+      </if>
+      <if test="tsm_ssid != null">
+        #{tsm_ssid,jdbcType=VARCHAR},
+      </if>
+      <if test="tsm_sign != null">
+        #{tsm_sign,jdbcType=VARCHAR},
+      </if>
+      <if test="tsm_event != null">
+        #{tsm_event,jdbcType=VARCHAR},
+      </if>
+      <if test="tsm_rcv_time != null">
+        #{tsm_rcv_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="create_date != null">
+        #{create_date,jdbcType=DATE},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="last_update_time != null">
+        #{last_update_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gionee.nfcPay.vo.models.NfcUnionCardInfoTb">
+    update nfc_union_card_info_tb
+    <set>
+      <if test="user_id != null">
+        user_id = #{user_id,jdbcType=VARCHAR},
+      </if>
+      <if test="phone_no != null">
+        phone_no = #{phone_no,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualCardNum != null">
+        virtualCardNum = #{virtualCardNum,jdbcType=VARCHAR},
+      </if>
+      <if test="xTsmCplc != null">
+        xTsmCplc = #{xTsmCplc,jdbcType=VARCHAR},
+      </if>
+      <if test="cardReferenceId != null">
+        cardReferenceId = #{cardReferenceId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardProductId != null">
+        cardProductId = #{cardProductId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDigits != null">
+        lastDigits = #{lastDigits,jdbcType=VARCHAR},
+      </if>
+      <if test="aid != null">
+        aid = #{aid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="personize_status != null">
+        personize_status = #{personize_status,jdbcType=VARCHAR},
+      </if>
+      <if test="tsm_ssid != null">
+        tsm_ssid = #{tsm_ssid,jdbcType=VARCHAR},
+      </if>
+      <if test="tsm_sign != null">
+        tsm_sign = #{tsm_sign,jdbcType=VARCHAR},
+      </if>
+      <if test="tsm_event != null">
+        tsm_event = #{tsm_event,jdbcType=VARCHAR},
+      </if>
+      <if test="tsm_rcv_time != null">
+        tsm_rcv_time = #{tsm_rcv_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="create_date != null">
+        create_date = #{create_date,jdbcType=DATE},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="last_update_time != null">
+        last_update_time = #{last_update_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where virtualCardRefId = #{virtualCardRefId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gionee.nfcPay.vo.models.NfcUnionCardInfoTb">
+    update nfc_union_card_info_tb
+    set user_id = #{user_id,jdbcType=VARCHAR},
+      phone_no = #{phone_no,jdbcType=VARCHAR},
+      virtualCardNum = #{virtualCardNum,jdbcType=VARCHAR},
+      xTsmCplc = #{xTsmCplc,jdbcType=VARCHAR},
+      cardReferenceId = #{cardReferenceId,jdbcType=VARCHAR},
+      cardProductId = #{cardProductId,jdbcType=VARCHAR},
+      lastDigits = #{lastDigits,jdbcType=VARCHAR},
+      aid = #{aid,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      personize_status = #{personize_status,jdbcType=VARCHAR},
+      tsm_ssid = #{tsm_ssid,jdbcType=VARCHAR},
+      tsm_sign = #{tsm_sign,jdbcType=VARCHAR},
+      tsm_event = #{tsm_event,jdbcType=VARCHAR},
+      tsm_rcv_time = #{tsm_rcv_time,jdbcType=TIMESTAMP},
+      create_date = #{create_date,jdbcType=DATE},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      last_update_time = #{last_update_time,jdbcType=TIMESTAMP}
+    where virtualCardRefId = #{virtualCardRefId,jdbcType=VARCHAR}
+  </update>
+
+  
+ 	<select id="selectCardNewTsmEvent" resultType="com.gionee.nfcPay.vo.models.NfcUnionCardInfoTb">
+		select
+		<include refid="Base_Column_List" />
+		from nfc_union_card_info_tb
+		where virtualCardRefId = #{virtualCardRefId} and last_update_time &gt;
+		#{submitTime}
+	</select>
+	
+	<resultMap id="CardListResult" type="com.gionee.nfcPay.vo.rsp.QueryCardListItemVo">
+		<result column="aid" jdbcType="VARCHAR" property="aid" />
+		<result column="xTsmCplc" jdbcType="VARCHAR" property="xTsmCplc" />
+		<result column="virtualCardRefId" jdbcType="VARCHAR" property="virtualCardRefId" />
+		<result column="lastDigits" jdbcType="VARCHAR" property="lastDigits" />
+		<result column="tel" jdbcType="VARCHAR" property="tel" />
+		<result column="cardArt" jdbcType="VARCHAR" property="cardArt" />
+		<result column="type" jdbcType="VARCHAR" property="type" />
+		<result column="card_no" jdbcType="VARCHAR" property="card_no" />
+		<result column="displayName" jdbcType="VARCHAR" property="displayName" />
+		<result column="website" jdbcType="VARCHAR" property="website" />
+		<result column="cardDetailArt" jdbcType="VARCHAR" property="cardDetailArt" />
+	</resultMap>
+	<select id="selectBusCardUnionCardList" resultMap="CardListResult"
+		resultType="java.util.List">
+
+		SELECT
+		card.virtualCardRefId,
+		card.lastDigits,
+		card.aid,
+		card.xTsmCplc,
+		product.cardArt,
+		product.displayName,
+		product.cardArt AS 'cardDetailArt',
+		'bank' AS "type",
+		CONCAT(
+		'**** ****
+		**** ',
+		card.lastDigits
+		) as "card_no",
+		case when product.type = 'DEBIT' then issue.debitWebsite
+		when product.type = 'CREDIT' then issue.creditWebsite
+		else ''
+		end as website, 
+		case when product.type = 'DEBIT' then issue.debitCallCenterNumber
+		when product.type = 'CREDIT' then issue.creditCallCenterNumber
+		else ''
+		end as tel		
+		FROM
+		nfc_union_card_info_tb card
+		LEFT JOIN nfc_union_card_product_info_tb product
+		ON card.cardProductId = product.cardProductId
+		LEFT JOIN nfc_union_card_issuer_info_tb issue
+		on product.issuerId = issue.issuerId
+		where card.user_id =  #{user_id,jdbcType=VARCHAR}
+		UNION
+		SELECT
+		NULL AS virtualCardRefId,
+		RIGHT(bc.card_id, 4) as 'lastDigits',
+		bc.aid,
+		bc.xTsmCplc,
+		bc.card_logo_url as 'cardArt',
+		bc.card_product_name as 'displayName',
+		bs.detail_icon_url AS 'cardDetailArt',
+		'bus' AS TYPE,
+		card_no,
+		bs.contract_url AS website,
+		bc.customer_service_tel_no tel
+		FROM
+		nfc_buscard_user_card_info_tb bc
+		left join nfc_buscard_support_city_info_tb bs
+		on bc.city_code = bs.city_code
+		WHERE bc.user_id = #{user_id,jdbcType=VARCHAR}
+
+	</select>
+	
+	<select id="selectBusCardUnionCardListSize"
+		resultType="java.lang.Integer">
+		select count(1) from
+		(
+		SELECT
+		card.virtualCardRefId,
+		card.cardProductId,
+		card.lastDigits,
+		card.aid,
+		product.cardArt,
+		product.displayName,
+		product.cardArt AS 'cardDetailArt',
+		'bank' AS "type",
+		CONCAT(
+		'**** ****
+		**** ',
+		card.lastDigits
+		) as "card_no",
+		case when product.type = 'DEBIT' then issue.debitWebsite
+		when product.type = 'CREDIT' then issue.creditWebsite
+		else ''
+		end as website, 
+		case when product.type = 'DEBIT' then issue.debitCallCenterNumber
+		when product.type = 'CREDIT' then issue.creditCallCenterNumber
+		else ''
+		end as tel		
+		FROM
+		nfc_union_card_info_tb card
+		LEFT JOIN nfc_union_card_product_info_tb product
+		ON card.cardProductId = product.cardProductId
+		LEFT JOIN nfc_union_card_issuer_info_tb issue
+		on product.issuerId = issue.issuerId
+		where card.user_id =  #{user_id,jdbcType=VARCHAR}
+		UNION
+		SELECT
+		NULL AS virtualCardRefId,
+		bc.card_id as 'cardProductId',
+		RIGHT(bc.card_id, 4) as 'lastDigits',
+		bc.aid,
+		bc.card_logo_url as 'cardArt',
+		bc.card_product_name as 'displayName',
+		bs.detail_icon_url AS 'cardDetailArt',
+		card_no,
+		'bus' AS TYPE,
+		bs.contract_url AS website,
+		bc.customer_service_tel_no tel
+		FROM
+		nfc_buscard_user_card_info_tb bc
+		left join nfc_buscard_support_city_info_tb bs
+		on bc.city_code = bs.city_code
+		WHERE bc.user_id = #{user_id,jdbcType=VARCHAR}
+		) as t
+	</select>
+</mapper>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jaxws="http://cxf.apache.org/jaxws" 
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs" 
+	xmlns:cxf="http://cxf.apache.org/core"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+			http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+    		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+	
+	<context:component-scan
+		base-package="com.gionee.nfcPay.action,com.gionee.nfcPay.service,com.gionee.nfcPay.sao,com.gionee.nfcPay.dao,com,gionne.nfcPay.job,com.gionee.web.filter" />
+	
+
+	<task:annotation-driven/> 
+	<aop:aspectj-autoproxy/>
+	<util:properties id="nfcPay_config"  				location="classpath:nfcPay_config.properties" />
+	<util:properties id="sms_config"  				    location="classpath:sms_config.properties" />
+	<util:properties id="mail_config"					location="classpath:mail_config.properties" />
+
+	<context:property-placeholder 	    		       		location="classpath:*_config.properties"/>
+		<bean id="transactionMapService"
+		class="com.gionee.common.transactionMap.impl.TransactionMapServiceImpl">
+		<property name="transactionMap">
+			<map>
+				 <!-- 公交卡接口  begin-->
+				 <entry key="220001" value-ref="operationCtrlAction" /> 		<!-- 接收客户端请求，查询公交卡业务权限 -->
+				 <entry key="220002" value-ref="querySupportCitiesAction" /> 	<!-- 接收客户端请求，查询公交卡开通城市列表 -->
+				 <entry key="220003" value-ref="clientAdviceUserActiveCardAction" /> 	<!-- 客户端通知用户开卡 -->
+				 <!-- 公交卡接口 end -->
+				
+				 <!-- 钱包客户端到NFC服务器接口  begin-->
+				 <entry key="310001" value-ref="checkCardAction" /> 			<!-- 接收客户端请求，银联卡bin校验 -->
+				 <entry key="310002" value-ref="cardEnrollAction" /> 			<!-- 接收客户端请求，银联卡申请-->
+				 <entry key="310003" value-ref="applySmsAction" /> 				<!-- 接收客户端请求，申请短信码-->
+				 <entry key="310004" value-ref="verifySmsAction" /> 			<!-- 接收客户端请求，验证短信码-->
+				 <entry key="310005" value-ref="deleteCardAction" /> 			<!-- 接收客户端请求，删除设备卡-->
+				 <entry key="310006" value-ref="deviceStatusChangeAction" /> 	<!-- 接收客户端请求，变更设备状态-->
+				 <entry key="310007" value-ref="queryCardEventAction" /> 		<!-- 接收客户端请求，轮询设备卡的操作指令-->
+				 <entry key="310008" value-ref="payPasswordAuthAction" /> 		<!-- 接收客户端请求，支付密码校验-->
+				 
+				 <entry key="410001" value-ref="queryCardListAction" /> 		<!-- 接收客户端请求，查询卡包列表 -->
+				
+				  <!-- 钱包客户端到NFC服务器接口  end-->
+				  
+				  <!-- 银联到NFC服务器接口  begin-->
+				  <entry key="510001" value-ref="personizeResultNotifyAction" />    			<!-- 接收银联请求，个人化结果通知 --> 
+				  <entry key="510002" value-ref="tsmLibDataNotifyAction" /> 					<!-- 接收银联请求，TsmLibData通知 -->
+				  <entry key="510003" value-ref="cardStatusChangeNotifyAction" /> 				<!-- 接收银联请求，设备卡状态变更通知 -->
+				  <entry key="510004" value-ref="cardInfoChangeNotifyAction" /> 				<!-- 接收银联请求，卡面信息变更通知 -->
+				  <entry key="510005" value-ref="cardInfoChangeOperationResultNotifyAction" /> 	<!-- 接收银联请求，卡面信息变更通知 --> 
+				  <entry key="510006" value-ref="issuerInfoChangeNotifyAction" /> 					<!-- 接收银联请求，发行卡信息变更通知 -->
+				  <entry key="510007" value-ref="cardProductInfoChangeNotifyAction" /> 			<!-- 接收银联请求，卡产品信息变更通知 -->
+				  <entry key="510008" value-ref="batchCardProductInfoSynNotifyAction" /> 		<!-- 接收银联请求，批量同步卡产品信息通知 -->
+				  <entry key="510009" value-ref="transResultNotifyAction" /> 					<!-- 接收银联请求，交易结果信息通知 -->
+				  <!-- 银联到NFC服务器接口  end-->
+			</map>
+		</property>
+	</bean>
+
+	
+	      <!--with c3p0 connection pool  -->
+        
+        <!-- 交易数据库 -->
+      <bean id="dataSource_now" class="com.mchange.v2.c3p0.ComboPooledDataSource"> 
+	        <property name="driverClass" value="${database.driver}"></property>     
+	        <property name="jdbcUrl" 	 value="${database.url}"></property>
+	        <property name="user" 		 value="${database.username}"></property> 
+	        <property name="password" 	 value="${database.password}"></property> 
+	        <property name="minPoolSize" value="${database.minimumConnectionCount}"></property> 
+	        <property name="maxPoolSize" value="${database.maximumConnectionCount}"></property> 
+	        <property name="maxIdleTime" value="${database.houseKeepingSleepTime}"></property> 
+      </bean>
+        
+      <!-- 历史库，历史的数据的查询到另外的表进行查询 -->
+      <bean id="dataSource_his"  class="com.mchange.v2.c3p0.ComboPooledDataSource"> 
+	        <property name="driverClass" value="${database_his.driver}"></property>     
+            <property name="jdbcUrl"     value="${database_his.url}"></property>
+            <property name="user" 		 value="${database_his.username}"></property> 
+            <property name="password"    value="${database_his.password}"></property> 
+            <property name="minPoolSize" value="${database_his.minimumConnectionCount}"></property> 
+            <property name="maxPoolSize" value="${database_his.maximumConnectionCount}"></property> 
+            <property name="maxIdleTime" value="${database_his.houseKeepingSleepTime}"></property> 
+      </bean> 
+	
+	     <bean id="dataSource" class="com.gionee.common.multidataSource.DynamicDataSource">   
+        <property name="targetDataSources">   
+            <map key-type="java.lang.String">   
+                <entry key="ds_now" value-ref="dataSource_now" ></entry>   
+                <entry key="ds_his" value-ref="dataSource_his" ></entry>   
+            </map>   
+        </property>   
+        <property name="defaultTargetDataSource" ref="dataSource_now"></property>   
+    </bean> 
+	
+	     
+	<bean id="sqlSessionFactory" name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:mybatis-config.xml"/>
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:com/gionee/nfcPay/dao/impl/mapper/*Mapper.xml</value> 
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="sqlSessionFactoryTemplate" name="sqlSessionFactoryTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+       <constructor-arg index="0" ref="sqlSessionFactory" />  
+    </bean>
+
+    <bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+    </bean>   
+    
+    
+        <tx:annotation-driven transaction-manager="transactionManager" /> 
+    
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.gionee.nfcPay.dao.mapper" />
+		<!-- spring 3.1.1 和mybatis 要用名字指定连接工厂 因为跟property-placeholder冲突 -->
+		<!-- <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" /> -->
+		<!-- <property name="sqlSessionFactory" ref="sqlSessionFactory" /> -->
+		<property name="sqlSessionTemplateBeanName"  value="sqlSessionFactoryTemplate"  />
+	</bean>
+    
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="add*"     propagation="REQUIRED" rollback-for="Exception" />
+            <tx:method name="del*"     propagation="REQUIRED" rollback-for="Exception" />
+            <tx:method name="modify*"  propagation="REQUIRED" rollback-for="Exception" />
+            <tx:method name="update*"  propagation="REQUIRED" rollback-for="Exception" />
+            <tx:method name="insert*"  propagation="REQUIRED" rollback-for="Exception" />
+            <tx:method name="txn_*"    propagation="REQUIRED" rollback-for="java.lang.Exception" no-rollback-for="com.gionee.common.exception.NotRollBackBizException"/> <!-- 需要加事务的函数开头 -->
+            <tx:method name="create*"  propagation="REQUIRED" rollback-for="java.lang.Exception" no-rollback-for="com.gionee.common.exception.NotRollBackBizException"/><!-- 定义不需要回滚的异常 -->
+            <tx:method name="*"        read-only="true" />
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="allManagerMethod" expression="execution(* com.gionee.nfcPay.service..*.*(..))" />
+        <aop:advisor pointcut-ref="allManagerMethod" advice-ref="txAdvice" order="10" />
+    </aop:config> 
+    
+
+	 <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host">
+			<value>${mail_host}</value>
+		</property>
+		<property name="username">
+			<value>${mail_username}</value>
+		</property>
+		<property name="port">
+			<value>${mail_port}</value>
+		</property>
+		<property name="password">
+			<value>${mail_password}</value>
+		</property>
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.timeout">25000</prop>
+			</props>
+		</property>
+	</bean>	
+	
+</beans>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gionee.nfcPay.dao.mapper.NfcCoreOrgSafeInfoTabMapper" >
+  <resultMap id="BaseResultMap" type="com.gionee.nfcPay.vo.models.NfcCoreOrgSafeInfoTab" >
+    <id column="seq_no" property="seq_no" jdbcType="VARCHAR" />
+    <result column="org_id" property="org_id" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="secret_key" property="secret_key" jdbcType="VARCHAR" />
+    <result column="org_rsa_public_key" property="org_rsa_public_key" jdbcType="VARCHAR" />
+    <result column="create_tm" property="create_tm" jdbcType="TIMESTAMP" />
+    <result column="create_date" property="create_date" jdbcType="DATE" />
+    <result column="last_upd_tm" property="last_upd_tm" jdbcType="TIMESTAMP" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="auditor" property="auditor" jdbcType="VARCHAR" />
+    <result column="is_256_key_length" property="is_256_key_length" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    seq_no, org_id, version, status, secret_key, org_rsa_public_key, create_tm, create_date, 
+    last_upd_tm, operator, auditor, is_256_key_length
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from nfc_core_org_safe_info_tab
+    where seq_no = #{seq_no,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from nfc_core_org_safe_info_tab
+    where seq_no = #{seq_no,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gionee.nfcPay.vo.models.NfcCoreOrgSafeInfoTab" >
+    insert into nfc_core_org_safe_info_tab (seq_no, org_id, version, 
+      status, secret_key, org_rsa_public_key, 
+      create_tm, create_date, last_upd_tm, 
+      operator, auditor, is_256_key_length
+      )
+    values (#{seq_no,jdbcType=VARCHAR}, #{org_id,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{secret_key,jdbcType=VARCHAR}, #{org_rsa_public_key,jdbcType=VARCHAR}, 
+      #{create_tm,jdbcType=TIMESTAMP}, #{create_date,jdbcType=DATE}, #{last_upd_tm,jdbcType=TIMESTAMP}, 
+      #{operator,jdbcType=VARCHAR}, #{auditor,jdbcType=VARCHAR}, #{is_256_key_length,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gionee.nfcPay.vo.models.NfcCoreOrgSafeInfoTab" >
+    insert into nfc_core_org_safe_info_tab
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="seq_no != null" >
+        seq_no,
+      </if>
+      <if test="org_id != null" >
+        org_id,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="secret_key != null" >
+        secret_key,
+      </if>
+      <if test="org_rsa_public_key != null" >
+        org_rsa_public_key,
+      </if>
+      <if test="create_tm != null" >
+        create_tm,
+      </if>
+      <if test="create_date != null" >
+        create_date,
+      </if>
+      <if test="last_upd_tm != null" >
+        last_upd_tm,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="auditor != null" >
+        auditor,
+      </if>
+      <if test="is_256_key_length != null" >
+        is_256_key_length,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="seq_no != null" >
+        #{seq_no,jdbcType=VARCHAR},
+      </if>
+      <if test="org_id != null" >
+        #{org_id,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="secret_key != null" >
+        #{secret_key,jdbcType=VARCHAR},
+      </if>
+      <if test="org_rsa_public_key != null" >
+        #{org_rsa_public_key,jdbcType=VARCHAR},
+      </if>
+      <if test="create_tm != null" >
+        #{create_tm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="create_date != null" >
+        #{create_date,jdbcType=DATE},
+      </if>
+      <if test="last_upd_tm != null" >
+        #{last_upd_tm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null" >
+        #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="is_256_key_length != null" >
+        #{is_256_key_length,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gionee.nfcPay.vo.models.NfcCoreOrgSafeInfoTab" >
+    update nfc_core_org_safe_info_tab
+    <set >
+      <if test="org_id != null" >
+        org_id = #{org_id,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="secret_key != null" >
+        secret_key = #{secret_key,jdbcType=VARCHAR},
+      </if>
+      <if test="org_rsa_public_key != null" >
+        org_rsa_public_key = #{org_rsa_public_key,jdbcType=VARCHAR},
+      </if>
+      <if test="create_tm != null" >
+        create_tm = #{create_tm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="create_date != null" >
+        create_date = #{create_date,jdbcType=DATE},
+      </if>
+      <if test="last_upd_tm != null" >
+        last_upd_tm = #{last_upd_tm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null" >
+        auditor = #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="is_256_key_length != null" >
+        is_256_key_length = #{is_256_key_length,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where seq_no = #{seq_no,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gionee.nfcPay.vo.models.NfcCoreOrgSafeInfoTab" >
+    update nfc_core_org_safe_info_tab
+    set org_id = #{org_id,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      secret_key = #{secret_key,jdbcType=VARCHAR},
+      org_rsa_public_key = #{org_rsa_public_key,jdbcType=VARCHAR},
+      create_tm = #{create_tm,jdbcType=TIMESTAMP},
+      create_date = #{create_date,jdbcType=DATE},
+      last_upd_tm = #{last_upd_tm,jdbcType=TIMESTAMP},
+      operator = #{operator,jdbcType=VARCHAR},
+      auditor = #{auditor,jdbcType=VARCHAR},
+      is_256_key_length = #{is_256_key_length,jdbcType=VARCHAR}
+    where seq_no = #{seq_no,jdbcType=VARCHAR}
+  </update>
+  
+    <select id="selectAllListByParams" resultMap="BaseResultMap" resultType="list">
+	select
+        <include refid="Base_Column_List" />
+        from nfc_core_org_safe_info_tab
+        where 1=1
+        <if test="params.org_id !=null and params.org_id !='' ">
+            and org_id=#{params.org_id}
+        </if>
+        <if test="params.version !=null and params.version !='' ">
+            and version <![CDATA[<=]]>#{params.version}
+        </if>
+        <if test="params.status !=null and params.status !='' ">
+            and status=#{params.status}
+        </if>
+        <choose>
+            <when test="orderParam != null">
+                order by ${orderParam}
+            </when>
+        </choose>
+    </select>
+ 
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<!-- <properties resource="database-config.properties" /> -->
+	<!-- 如果命令行运行，则需要加入此jar,放到跟 mybatis-generator-core-1.3.2.jar一起 -->
+	<!-- 如果通过程序，则用WalletMyBatisGenerator生成，不用配置 classPathEntry -->
+	<classPathEntry location="mysql-connector-java-5.1.15-bin.jar" />
+
+	<context id="context1" targetRuntime="MyBatis3">
+		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+		<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+			<property name="searchString" value="Example$" />
+			<property name="replaceString" value="Criteria" />
+		</plugin>
+
+		<commentGenerator>
+			<!-- 删除代码中带有 代码生成器的注释信息 -->
+			<property name="suppressAllComments" value="true" />
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://18.8.10.90:3306/nfc_pay_db" userId="dba"
+			password="hlw_mysql" />
+
+		<javaModelGenerator targetPackage="com.gionee.nfcPay.vo.models"
+			targetProject="../java" />
+		<sqlMapGenerator targetPackage="com.gionee.nfcPay.dao.impl.mapper"
+			targetProject="." />
+		<javaClientGenerator targetPackage="com.gionee.nfcPay.dao.mapper"
+			targetProject="../java" type="XMLMAPPER" />
+	
+		<table tableName="nfc_core_org_safe_info_tab" schema="nfc_pay_db"
+		enableSelectByExample="false" enableDeleteByExample="false"
+		enableCountByExample="false" enableUpdateByExample="fasle">
+		    <property name="useActualColumnNames" value="true"/> 
+		</table>
+			
+	</context>
+</generatorConfiguration>

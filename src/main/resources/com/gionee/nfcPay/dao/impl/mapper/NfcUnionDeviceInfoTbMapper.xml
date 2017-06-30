@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gionee.nfcPay.dao.mapper.NfcUnionDeviceInfoTbMapper" >
+  <resultMap id="BaseResultMap" type="com.gionee.nfcPay.vo.models.NfcUnionDeviceInfoTb" >
+    <id column="xTsmCplc" property="xTsmCplc" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="create_date" property="create_date" jdbcType="DATE" />
+    <result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
+    <result column="last_upd_time" property="last_upd_time" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    xTsmCplc, status, create_date, create_time, last_upd_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from nfc_union_device_info_tb
+    where xTsmCplc = #{xTsmCplc,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from nfc_union_device_info_tb
+    where xTsmCplc = #{xTsmCplc,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gionee.nfcPay.vo.models.NfcUnionDeviceInfoTb" >
+    insert into nfc_union_device_info_tb (xTsmCplc, status, create_date, 
+      create_time, last_upd_time)
+    values (#{xTsmCplc,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{create_date,jdbcType=DATE}, 
+      #{create_time,jdbcType=TIMESTAMP}, #{last_upd_time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gionee.nfcPay.vo.models.NfcUnionDeviceInfoTb" >
+    insert into nfc_union_device_info_tb
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="xTsmCplc != null" >
+        xTsmCplc,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="create_date != null" >
+        create_date,
+      </if>
+      <if test="create_time != null" >
+        create_time,
+      </if>
+      <if test="last_upd_time != null" >
+        last_upd_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="xTsmCplc != null" >
+        #{xTsmCplc,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="create_date != null" >
+        #{create_date,jdbcType=DATE},
+      </if>
+      <if test="create_time != null" >
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="last_upd_time != null" >
+        #{last_upd_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gionee.nfcPay.vo.models.NfcUnionDeviceInfoTb" >
+    update nfc_union_device_info_tb
+    <set >
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="create_date != null" >
+        create_date = #{create_date,jdbcType=DATE},
+      </if>
+      <if test="create_time != null" >
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="last_upd_time != null" >
+        last_upd_time = #{last_upd_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where xTsmCplc = #{xTsmCplc,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gionee.nfcPay.vo.models.NfcUnionDeviceInfoTb" >
+    update nfc_union_device_info_tb
+    set status = #{status,jdbcType=VARCHAR},
+      create_date = #{create_date,jdbcType=DATE},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      last_upd_time = #{last_upd_time,jdbcType=TIMESTAMP}
+    where xTsmCplc = #{xTsmCplc,jdbcType=VARCHAR}
+  </update>
+</mapper>
